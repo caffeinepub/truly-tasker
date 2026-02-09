@@ -1,0 +1,74 @@
+{
+  "kind": "build_request",
+  "title": "Fix IST-based streak, preserve localStorage data across deployments, and update footer branding",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Update the engagement streak logic so the streak increments only when the real calendar date changes in IST (Asia/Kolkata), not when the page is refreshed/reloaded/opened multiple times within the same IST day.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-20"
+        ],
+        "quotes": [
+          "Firstly the streak moves by one every time you refresh, reload or open the webpage again , I want to change so it works on real time clock IST"
+        ]
+      },
+      "acceptanceCriteria": [
+        "If the user refreshes/reloads/opens the app multiple times on the same IST date, the displayed streak value does not increase.",
+        "When the IST date changes (e.g., after midnight IST), the next app load updates the streak according to the existing rules (continue streak if last visit was yesterday IST; reset to 1 otherwise).",
+        "The persisted field used to track the last visit day is stored/compared as an IST day identifier (not derived from UTC `toISOString()` in a way that can shift dates for IST users)."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Ensure the app always loads existing tasks/days/streak data from the previous deployed version(s) by keeping localStorage persistence fully backward-compatible, including reading any previously-used storage keys and migrating them into the current key without data loss.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-20"
+        ],
+        "quotes": [
+          "the thing that the data and tasks in the previous version should be read by the newest version so I dont have to re write day and then come to day 2,3,4...........etc"
+        ]
+      },
+      "acceptanceCriteria": [
+        "After redeploying a new build, existing users see their previously created study days and tasks immediately on first load (no blank state) as long as their browser localStorage still has the previous data.",
+        "If legacy storage keys exist, the app migrates them into the current storage key and continues using the current key going forward.",
+        "The migration normalizes tasks so all tasks have valid IDs and required fields (no runtime errors when rendering or using Pomodoro task selection)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Replace the sidebar/footer credit text \"Built with ❤️ using caffeine.ai\" with exactly: \"Developed product by Aditya Verma\" (plain text, no link).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-20"
+        ],
+        "quotes": [
+          "replace it by Developed product by Aditya Verma"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The sidebar footer shows exactly \"Developed product by Aditya Verma\".",
+        "The caffeine.ai link is removed from the footer area."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under frontend/src/components/ui (read-only).",
+    "Do not modify the Internet Identity hooks or actor hooks in the immutablePaths list.",
+    "Backend must remain a single Motoko actor; no new backend services."
+  ],
+  "nonGoals": [
+    "Adding new features beyond the 3 requested changes.",
+    "Introducing server-side persistence or external databases to replace localStorage.",
+    "Changing app name, logo, navigation structure, or adding new sections."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

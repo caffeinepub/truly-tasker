@@ -1,0 +1,70 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-09T06:18:51.381Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 3,
+    "implemented": 3,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Update the engagement streak logic so the streak increments only when the real calendar date changes in IST (Asia/Kolkata), not when the page is refreshed/reloaded/opened multiple times within the same IST day.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/taskerLogic.ts",
+          "frontend/src/state/taskerTypes.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/utils/taskerLogic.ts",
+          "frontend/src/state/taskerTypes.ts"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Ensure the app always loads existing tasks/days/streak data from the previous deployed version(s) by keeping localStorage persistence fully backward-compatible, including reading any previously-used storage keys and migrating them into the current key without data loss.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/storageKeys.ts",
+          "frontend/src/state/storageKeys.ts",
+          "frontend/src/hooks/usePersistedTaskerState.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/utils/storageKeys.ts",
+          "frontend/src/state/storageKeys.ts",
+          "frontend/src/hooks/usePersistedTaskerState.ts"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Replace the sidebar/footer credit text \"Built with ❤️ using caffeine.ai\" with exactly: \"Developed product by Aditya Verma\" (plain text, no link).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/layout/SidebarNav.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/layout/SidebarNav.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/components/layout/SidebarNav.tsx",
+    "frontend/src/hooks/usePersistedTaskerState.ts",
+    "frontend/src/state/storageKeys.ts",
+    "frontend/src/state/taskerTypes.ts",
+    "frontend/src/utils/storageKeys.ts",
+    "frontend/src/utils/taskerLogic.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

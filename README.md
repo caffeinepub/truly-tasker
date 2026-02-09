@@ -1,2 +1,3 @@
-# truly-tasker
-Exported from Caffeine project: Fix IST-based streak, preserve localStorage data across deployments, and update footer branding
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`
