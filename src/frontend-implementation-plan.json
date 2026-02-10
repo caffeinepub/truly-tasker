@@ -1,67 +1,21 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "IST-based streak logic, backward-compatible localStorage migration, and footer branding update",
+  "title": "Retry build & deploy Truly Tasker (Version 6) without source changes",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Make engagement streak advance only when the calendar day changes in IST (Asia/Kolkata), not on same-day reloads.",
+      "summary": "Retry the existing Version 6 build and production deployment with no application code changes, ensuring the deployed UI and localStorage behavior remain unchanged.",
       "acceptanceCriteria": [
-        "If the user refreshes/reloads/opens the app multiple times on the same IST date, the displayed streak value does not increase.",
-        "When the IST date changes (e.g., after midnight IST), the next app load updates the streak according to the existing rules (continue streak if last visit was yesterday IST; reset to 1 otherwise).",
-        "The persisted field used to track the last visit day is stored/compared as an IST day identifier (not derived from UTC `toISOString()` in a way that can shift dates for IST users)."
+        "Deployment completes successfully without requiring any source code modifications.",
+        "The deployed app loads in a browser and renders the existing 'Truly Tasker' UI (sidebar + sections: Dashboard, Calendar, Pomodoro Timer, Achievements, Settings).",
+        "No regressions: existing localStorage-backed behavior (tasks/days/pomodoro/theme) works as before after deployment."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/utils/taskerLogic.ts",
-          "operation": "modify",
-          "description": "Update streak date handling to compute and compare a stable IST day identifier (Asia/Kolkata) for today/yesterday, and avoid using UTC-based toISOString splitting for day comparison. Ensure updateEngagementStreak returns and compares IST day IDs so same-day reloads do not increment streak."
-        },
-        {
-          "path": "frontend/src/state/taskerTypes.ts",
-          "operation": "modify",
-          "description": "Adjust TaskerState documentation/comment for lastVisitDay to reflect it is stored as an IST day identifier (e.g., YYYY-MM-DD in Asia/Kolkata) to prevent timezone-related streak drift."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Keep localStorage persistence backward-compatible by reading legacy keys and migrating data into the current key without data loss, normalizing tasks for safe rendering and Pomodoro selection.",
-      "acceptanceCriteria": [
-        "After redeploying a new build, existing users see their previously created study days and tasks immediately on first load (no blank state) as long as their browser localStorage still has the previous data.",
-        "If legacy storage keys exist, the app migrates them into the current storage key and continues using the current key going forward.",
-        "The migration normalizes tasks so all tasks have valid IDs and required fields (no runtime errors when rendering or using Pomodoro task selection)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/utils/storageKeys.ts",
-          "operation": "modify",
-          "description": "Expand storage key definitions to include a backward-compatible list of known legacy keys (including the currently-defined legacy key), so the app can search multiple historical keys and migrate into the current key safely."
-        },
-        {
-          "path": "frontend/src/state/storageKeys.ts",
-          "operation": "modify",
-          "description": "Keep storage key constants aligned with frontend/src/utils/storageKeys.ts by adding the same backward-compatible legacy key list, preventing drift between state and utils key sources."
-        },
-        {
-          "path": "frontend/src/hooks/usePersistedTaskerState.ts",
-          "operation": "modify",
-          "description": "Enhance localStorage loading/migration to: (1) attempt current key first; (2) search all known legacy keys; (3) migrate the first found legacy payload into the current key; (4) normalize all tasks (ensure IDs and required fields) and sanitize pomodoro.selectedTaskId (unset if it no longer matches any normalized task) to prevent runtime errors."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Replace the sidebar/footer credit with exact plain text branding and remove the caffeine.ai link.",
-      "acceptanceCriteria": [
-        "The sidebar footer shows exactly \"Developed product by Aditya Verma\".",
-        "The caffeine.ai link is removed from the footer area."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/layout/SidebarNav.tsx",
-          "operation": "modify",
-          "description": "Replace the existing footer credit line and remove the anchor/link so the sidebar footer displays exactly: \"Developed product by Aditya Verma\" as plain text."
+          "path": "frontend/DEPLOYMENT_RETRY.md",
+          "operation": "create",
+          "description": "Add a deployment retry runbook documenting that Version 6 should be rebuilt and deployed without changing any existing project files, including a checklist to verify the deployed UI renders the existing Sidebar + sections (Dashboard/Calendar/Pomodoro Timer/Achievements/Settings) and that localStorage-backed behavior (tasks/days/pomodoro/theme) remains unchanged after deployment."
         }
       ]
     }

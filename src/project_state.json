@@ -1,63 +1,36 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Pomodoro/task streak web app: update streak based on real IST date (not page refresh), ensure data/tasks persist across app versions, and update footer branding text.",
-  "architectural_notes": [
-    "Streak/day calculations must use IST timezone (Asia/Kolkata) and advance only when IST calendar date changes.",
-    "Persist all user data across deployments by keeping localStorage key schema stable (or providing migration)."
-  ],
+  "summary": "User wants an export/download option for the project code, and wants to drastically reduce the number of project files (~20–25) without changing webpage appearance/behavior; repeated build attempts are failing due to internal AI/build errors and user wants the build to succeed.",
+  "architectural_notes": [],
   "known_issues": [
-    "Streak currently increments on refresh/reload/open instead of on real IST date change.",
-    "New deployments currently appear to start blank instead of loading existing localStorage data."
+    "Build/deploy attempts intermittently fail with internal AI error (user repeatedly retrying build)."
   ],
   "isFixRequest": true,
-  "existing_features": [
-    {
-      "id": "feature-update-the-engagement-streak-logic-so-the-streak-increments-only-when-the-real-calendar-date-changes-in-ist-asia-kolkata-not-when-the-page-is-refreshed-reloaded-opened-multiple-times-within-the-same-ist-day",
-      "title": "Update the engagement streak logic so the streak increments only when the real calendar date changes in IST (Asia/Kolkata), not when the page is refreshed/reloaded/opened multiple times within the same IST day.",
-      "reqIds": [
-        "REQ-1"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-ensure-the-app-always-loads-existing-tasks-days-streak-data-from-the-previous-deployed-version-s-by-keeping-localstorage-persistence-fully-backward-compatible-including-reading-any-previously-used-storage-keys-and-migrating-them-into-the-current-key-without-data-loss",
-      "title": "Ensure the app always loads existing tasks/days/streak data from the previous deployed version(s) by keeping localStorage persistence fully backward-compatible, including reading any previously-used storage keys and migrating them into the current key without data loss.",
-      "reqIds": [
-        "REQ-2"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-replace-the-sidebar-footer-credit-text-built-with-using-caffeine-ai-with-exactly-developed-product-by-aditya-verma-plain-text-no-link",
-      "title": "Replace the sidebar/footer credit text \"Built with ❤️ using caffeine.ai\" with exactly: \"Developed product by Aditya Verma\" (plain text, no link).",
-      "reqIds": [
-        "REQ-3"
-      ],
-      "version": 1
-    }
-  ],
+  "existing_features": [],
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Update streak logic to increment only when the real IST date changes (not on refresh/reload).",
+      "summary": "Add an export/download button to download the full draft project code as a ZIP/folder",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-2",
-      "summary": "Ensure newest deployment reads and preserves existing user data (tasks/days/streak) from previous versions via stable localStorage keys / migration as needed.",
+      "summary": "Refactor/restructure project to reduce total code files to ~20–25 without changing webpage UI/behavior",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-3",
-      "summary": "Replace footer text 'Built with love using Caffiene' with 'Developed product by Aditya Verma'.",
-      "reqIds": [],
+      "summary": "Re-run the build and deploy/publish the existing draft app (Version 6) to the Internet Computer production/network without making any code changes.",
+      "reqIds": [
+        "REQ-1"
+      ],
       "status": "pending"
     }
   ],
-  "projectName": "Fix IST-based streak, preserve localStorage data across deployments, and update footer branding",
+  "projectName": "Retry build and deploy the current draft app (Version 6) without code changes",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

@@ -1,12 +1,10 @@
 # Specification
 
 ## Summary
-**Goal:** Make the streak follow the real IST calendar day, preserve existing localStorage data across redeployments, and update the footer credit text.
+**Goal:** Re-run the build and deploy/publish the existing draft app (Version 6) to the Internet Computer production/network without making any code changes.
 
 **Planned changes:**
-- Update streak logic to increment only when the IST (Asia/Kolkata) date changes, preventing multiple increments from refresh/reload within the same IST day.
-- Store/compare the “last visit day” using an IST day identifier to avoid UTC-based date shifts.
-- Add backward-compatible localStorage loading: read any legacy storage keys from previous versions, migrate them into the current key on first load, and normalize task data (e.g., ensure valid task IDs/required fields).
-- Replace the sidebar/footer credit text with exactly: “Developed product by Aditya Verma” (plain text, no link), removing the caffeine.ai mention/link.
+- Retry the build pipeline for the current draft app (Version 6) as-is.
+- Deploy/publish the already-existing frontend and backend artifacts to the Internet Computer production/network.
 
-**User-visible outcome:** The streak no longer increases on refresh during the same IST day, prior tasks/days/streak reappear automatically after deploying a new version (without re-entering data), and the footer shows the updated developer credit text.
+**User-visible outcome:** The deployed app loads in a browser and renders the existing “Truly Tasker” UI (Dashboard, Calendar, Pomodoro Timer, Achievements, Settings) with current localStorage-backed behavior (tasks/days/pomodoro/theme) working as before.
