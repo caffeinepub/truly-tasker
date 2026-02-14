@@ -1,7 +1,7 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-09T18:35:48.659Z",
+  "generatedAt": "2026-02-14T04:38:46.196Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
@@ -11,11 +11,11 @@
     "implemented": 0,
     "items": [
       {
-        "id": "REQ-1",
-        "summary": "Re-run the build and deploy/publish the existing draft app (Version 6) to the Internet Computer production/network without making any code changes.",
+        "id": "REQ-3",
+        "summary": "Re-run the build and deploy/publish the currently deployed draft app to the Internet Computer without making any code changes (republish exactly as-is).",
         "status": "missing",
         "plannedFiles": [
-          "frontend/DEPLOYMENT_RETRY.md"
+          "frontend/src/main.tsx"
         ],
         "matchedFiles": []
       }
@@ -23,7 +23,6 @@
   },
   "changedFiles": [
     "build-request.json",
-    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-implementation-plan.json",
     "project_state.json",

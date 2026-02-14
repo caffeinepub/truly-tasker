@@ -1,13 +1,37 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-09T18:35:48.657Z",
-  "summary": "The BuildRequest explicitly required a build/deploy retry with no code changes. The diff shows a code change to `project_state.json` and does not include any build/deploy artifacts or configuration indicating a redeploy occurred. It also introduces unrelated feature requests (export ZIP, file-count refactor) that were explicitly non-goals.",
+  "generatedAt": "2026-02-14T04:38:46.194Z",
+  "summary": "The diff modifies a repository file (project_state.json) and does not provide evidence of a rebuild/redeploy. It also introduces/request-tracks multiple additional features explicitly listed as non-goals, which conflicts with the BuildRequest constraint to republish without code changes or new features/UI changes.",
   "missing_requirements": [
     {
-      "id": "REQ-1",
-      "requirement": "Re-run the build and deploy/publish the existing draft app (Version 6) to the Internet Computer production/network without making any code changes.",
-      "reason": "The diff contains only a modification to `project_state.json` and provides no evidence of a successful build/deploy or any deployment-related output/config changes. Additionally, the request required no code changes, but a file was modified.",
+      "id": "REQ-3",
+      "requirement": "Re-run the build and deploy/publish the currently deployed draft app to the Internet Computer without making any code changes (republish exactly as-is).",
+      "reason": "The diff only shows an edit to project_state.json and contains no evidence of any build/deploy action or deployment output/accessibility. Additionally, a codebase change is present, which conflicts with the 'exactly as-is' constraint.",
+      "evidence": [
+        "project_state.json"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "No source files (frontend or backend) are modified as part of this work.",
+      "reason": "A file in the repository was modified (project_state.json). While it may not be frontend/backend source, the acceptance criteria states no source files are modified; the diff provides no proof that frontend/backend sources were untouched, and it does show at least one repo change occurred.",
+      "evidence": [
+        "project_state.json"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "A new deployment is produced from the current codebase and is accessible for preview/publishing.",
+      "reason": "No deployment artifacts, configuration changes, CI logs, or release-related changes are shown in the diff summary—only a project_state.json update.",
+      "evidence": [
+        "project_state.json"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "User-facing text remains in English.",
+      "reason": "The diff provides no evidence that user-facing text was verified/kept in English; it only updates internal project metadata.",
       "evidence": [
         "project_state.json"
       ]
@@ -15,21 +39,56 @@
   ],
   "hallucinated_features": [
     {
-      "description": "Added/recorded a new feature request to export/download the project code as a ZIP/folder (AR-1).",
-      "reason": "The BuildRequest explicitly lists adding new features like export/download ZIP as a non-goal and only requests a build/deploy retry.",
+      "description": "Tracking/introducing requests for export/download of project code as ZIP.",
+      "reason": "Explicitly listed as a non-goal in the BuildRequest, and not required for REQ-3 republish-without-changes.",
       "evidence": [
         "project_state.json"
       ]
     },
     {
-      "description": "Added/recorded a new feature request to refactor/restructure the project to reduce total files to ~20–25 (AR-2).",
-      "reason": "The BuildRequest explicitly lists refactoring to reduce file count as a non-goal and only requests a build/deploy retry.",
+      "description": "Tracking/introducing a refactor to reduce file count to ~20–25.",
+      "reason": "Explicitly listed as a non-goal and contradicts 'Do not modify any existing source code'.",
+      "evidence": [
+        "project_state.json"
+      ]
+    },
+    {
+      "description": "Tracking/introducing data restore/migration to restore previously-entered days/tasks after publishing.",
+      "reason": "Explicitly listed as a non-goal and not part of REQ-3.",
+      "evidence": [
+        "project_state.json"
+      ]
+    },
+    {
+      "description": "Tracking/introducing a 'Finish Day' locking feature request.",
+      "reason": "Explicitly listed as a non-goal and not part of REQ-3.",
+      "evidence": [
+        "project_state.json"
+      ]
+    },
+    {
+      "description": "Tracking/introducing fixes for 'Add Task' issues.",
+      "reason": "Explicitly listed as a non-goal and not part of REQ-3.",
+      "evidence": [
+        "project_state.json"
+      ]
+    },
+    {
+      "description": "Tracking/introducing changes to Pomodoro task picker behavior (filter tasks by selected day).",
+      "reason": "Explicitly listed as a non-goal and not part of REQ-3.",
+      "evidence": [
+        "project_state.json"
+      ]
+    },
+    {
+      "description": "Adding/associating unrelated requirement IDs (REQ-1, REQ-2) in new_feature_requests for deploy/publish items.",
+      "reason": "The BuildRequest only specifies REQ-3; introducing additional REQ IDs is not requested and may confuse traceability.",
       "evidence": [
         "project_state.json"
       ]
     }
   ],
-  "confidence": 0.78,
+  "confidence": 0.72,
   "changed_files": [
     "project_state.json"
   ]

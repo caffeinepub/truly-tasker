@@ -1,34 +1,40 @@
 {
   "kind": "build_request",
-  "title": "Retry build and deploy the current draft app (Version 6) without code changes",
+  "title": "Republish current draft app without code changes",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-1",
-      "text": "Re-run the build and deploy/publish the existing draft app (Version 6) to the Internet Computer production/network without making any code changes.",
-      "target": "both",
+      "id": "REQ-3",
+      "text": "Re-run the build and deploy/publish the currently deployed draft app to the Internet Computer without making any code changes (republish exactly as-is).",
+      "target": "unknown",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-1",
+          "msg-2"
         ],
         "quotes": [
-          "run it again"
+          "ok deploy this",
+          "dont add anything new,just republish it"
         ]
       },
       "acceptanceCriteria": [
-        "Deployment completes successfully without requiring any source code modifications.",
-        "The deployed app loads in a browser and renders the existing 'Truly Tasker' UI (sidebar + sections: Dashboard, Calendar, Pomodoro Timer, Achievements, Settings).",
-        "No regressions: existing localStorage-backed behavior (tasks/days/pomodoro/theme) works as before after deployment."
+        "No source files (frontend or backend) are modified as part of this work.",
+        "A new deployment is produced from the current codebase and is accessible for preview/publishing.",
+        "User-facing text remains in English."
       ]
     }
   ],
   "constraints": [
-    "Do not make any code changes to the project; this request is only to retry build/deploy of the current draft (Version 6).",
-    "Respect the platform architecture constraints (single Motoko actor; immutable frontend paths must not be edited)."
+    "Do not add any new features or UI changes; republish only.",
+    "Do not modify any existing source code; deployment must be from the current repository state."
   ],
   "nonGoals": [
-    "Adding new features (e.g., export/download ZIP, refactoring to reduce file count).",
-    "Changing UI appearance, text, or behavior."
+    "Implement export/download of project code.",
+    "Refactor to reduce file count.",
+    "Restore previously-entered days/tasks after publishing.",
+    "Add a 'Finish Day' locking feature.",
+    "Fix 'Add Task' issues.",
+    "Change Pomodoro task picker behavior."
   ],
   "imageRequirements": {
     "required": [],

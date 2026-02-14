@@ -1,10 +1,14 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
-  "summary": "User wants an export/download option for the project code, and wants to drastically reduce the number of project files (~20–25) without changing webpage appearance/behavior; repeated build attempts are failing due to internal AI/build errors and user wants the build to succeed.",
-  "architectural_notes": [],
+  "projectStateVersion": 7,
+  "summary": "User wants an export/download option for the project code, wants to drastically reduce the number of project files (~20–25) without changing webpage appearance/behavior, wants builds/deploys to succeed despite intermittent internal/safety/deployment issues, and now requests several app fixes: restore previously-entered day/task data after publishing (storage recovery/migration), add a 'Finish Day' button that locks a day from further edits, fix Add Task failing after dropdowns are filled, and restrict Pomodoro task picker to only show tasks for the currently selected day (including locked days).",
+  "architectural_notes": [
+    "Data persistence/recovery source is uncertain; user requests supporting both prior data sources (canister and/or localStorage). Need a defined precedence/fallback vs merge strategy to avoid duplicates/conflicts."
+  ],
   "known_issues": [
-    "Build/deploy attempts intermittently fail with internal AI error (user repeatedly retrying build)."
+    "Build/deploy attempts intermittently fail with internal AI error (user repeatedly retrying build).",
+    "Draft builds/deploys frequently expire or require republishing, interrupting workflow.",
+    "Production go-live/deployment sometimes fails (deployment error / safety protocol block observed)."
   ],
   "isFixRequest": true,
   "existing_features": [],
@@ -26,6 +30,46 @@
       "summary": "Re-run the build and deploy/publish the existing draft app (Version 6) to the Internet Computer production/network without making any code changes.",
       "reqIds": [
         "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Restore previously-entered days/tasks after publishing (recover/migrate data from prior version across storage locations)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Add a 'Finish Day' button (next to Collapse) with confirm popup; once confirmed, lock that day's tasks from further edits (no toggling/adding/editing) while still viewable",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Fix 'Add Task' button: currently fails to add task after all dropdown categories are filled",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Pomodoro 'choose task' should only list tasks for the currently selected day (including locked days, but not editable)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Publish the currently deployed draft (using the existing code with no changes) so the user does not lose access due to draft expiration.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Re-run the build and deploy/publish the currently deployed draft app to the Internet Computer without making any code changes (republish exactly as-is).",
+      "reqIds": [
+        "REQ-3"
       ],
       "status": "pending"
     }
